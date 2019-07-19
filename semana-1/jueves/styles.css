@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+section {
+  background: #000;
+}
+
+.btn {
+  background-color: red;
+  border-radius: 20px;
+  width: 20%;
+}
+
+#id {
+  background-color: blue;
+}
+
+.sport {
+}
+.sport__btn-active {
+}
+.sport__btn-invalid {
+}
