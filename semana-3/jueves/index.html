@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="items">
+      <h2 id="total">0</h2>
+      <label for="count">Picale papá</label>
+      <input type="number" id="count" />
+      <button>Picale</button>
+    </div>
+
+    <button id="new">nuevo</button>
+
+    <script>
+      const total = document.getElementById("total");
+      const btn = document.querySelector("button");
+      const input = document.getElementsByTagName("input");
+      const items = document.getElementById("items");
+      const btnNew = document.getElementById("new");
+
+      function createItem() {
+        console.log("aqui ando");
+        const div = document.createElement("div");
+        div.innerHTML = `
+            <input data-price='20' data-loquequiera='simon' />
+            <button>picale perro</button>
+          `;
+        items.appendChild(div);
+      }
+
+      btnNew.onclick = createItem;
+
+      let totalValue = 0;
+
+      btn.onclick = () => {
+        const value = input[0].value;
+        totalValue += parseInt(value);
+        total.innerText = totalValue;
+      };
+    </script>
+  </body>
+</html>
