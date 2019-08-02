@@ -82,3 +82,28 @@ class Animal {
 const leon = new Animal("leon", false);
 console.log(leon);
 leon.getIsInDanger();
+
+class Character {
+  constructor(health, damage, x, y, level) {
+    this.health = health;
+    this.damage = damage;
+    this.x = x;
+    this.y = y;
+    this.level = level;
+  }
+
+  attack() {
+    console.log("jaiiiaaaa! 👊🏻");
+  }
+}
+
+class Player extends Character {
+  constructor(health, damage, x, y, level, name, weapon) {
+    super(health, damage, x, y, level);
+    this.name = name;
+    this.weapon = weapon;
+  }
+}
+
+const morro = new Player(100, 20, 0, 0, 100, "morro", "MacBook Pro");
+console.log(morro.attack());
