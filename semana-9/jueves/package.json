@@ -12,6 +12,8 @@
     "chalk": "^2.4.2"
   },
   "dependencies": {
+    "morgan": "^1.9.1",
+    "node-http-server": "^8.1.2",
     "uikit": "^3.2.0"
   }
 }
