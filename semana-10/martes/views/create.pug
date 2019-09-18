@@ -1,0 +1,9 @@
+extends layout
+
+include mixins/_card
+
+block content
+    h4=titulo
+    ul
+        each morro in morros
+            +card(morro)

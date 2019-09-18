@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    // este es un comment
+    - var perro="perro"
+    h1(class=valid ? "valid" : "invalid")=perro
+        
+    case friends
+        when 0: p you have no friends
+        when 1: p you have a friend
+        default: p Yo tengo #{friends} de amigos y asi mas fuerte poder cantar
