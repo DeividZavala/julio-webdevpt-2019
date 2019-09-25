@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Event = require("../models/Event");
+const Participant = require("../models/Participant");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -11,8 +12,10 @@ router.get("/", (req, res, next) => {
 
 router.get("/edit/:id", (req, res) => {
   const { id } = req.params;
-  Event.findById(id).then(event => {
-    res.render("update", { event });
+  const eventPromise = Event.findById(id);
+  const participantsPromise = Participant.find();
+  Promise.all([eventPromise, participantsPromise]).then(response => {
+    res.render("update", { event: response[0], participants: response[1] });
   });
 });
 
@@ -26,11 +29,14 @@ router.post("/edit/:id", (req, res) => {
 });
 
 router.get("/new-event", (req, res) => {
-  res.render("new-event", { title: "Nuevo Evento" });
+  Participant.find().then(participants => {
+    res.render("new-event", { title: "Nuevo Evento", participants });
+  });
 });
 
 router.post("/new-event", (req, res) => {
-  const event = { ...req.body, participants: req.body.participants.split(",") };
+  console.log(req.body);
+  const event = { ...req.body };
 
   Event.create(event)
     .then(() => res.redirect("/"))

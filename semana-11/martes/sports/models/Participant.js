@@ -11,4 +11,4 @@ const participantSchema = new Schema({
   sport: String
 });
 
-module.exports = model("Participant", eventSchema);
+module.exports = model("Participant", participantSchema);

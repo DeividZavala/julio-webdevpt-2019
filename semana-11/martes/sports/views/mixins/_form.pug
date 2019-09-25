@@ -1,4 +1,4 @@
-mixin form(data={})
+mixin form(data={}, participants = [])
   form(action=data._id ? `/edit/${data._id}` : "/new-event" method="POST")
       div
         label(for="title") Titulo:
@@ -8,7 +8,15 @@ mixin form(data={})
         input(id="location" type="text" name="location" value=data.location)
       div
         label(for="participants") Participantes:
-        input(type="text" name="participants" value=data.participants)
+          each participant in participants
+            label(for=participant.name)=participant.name
+            input(id=participant.name 
+            type="checkbox" 
+            checked=data.participants.includes(participant._id) 
+            value=participant._id 
+            name="participants")
+          else
+            div No hay opciones disponibles
       div
         label(for="sport") Deporte:
         input(type="text" name="sport" value=data.sport)
