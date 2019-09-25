@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a:not(:last-child) {
+  color: #00b7ff;
+  margin-right: 2%; }
+
+ul a {
+  margin-left: 2%; }
+
+h1,
+h2,
+h3,
+h4 {
+  color: red; }
+
+/*# sourceMappingURL=style.css.map */

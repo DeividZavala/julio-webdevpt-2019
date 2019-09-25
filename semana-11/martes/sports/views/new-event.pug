@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  main
+    form(action="/new-event" method="POST")
+      div
+        label(for="location") Lugar:
+        input(id="location" type="text" name="location")
+      div
+        label(for="participants") Participantes:
+        input(type="text" name="participants")
+      div
+        label(for="sport") Deporte:
+        input(type="text" name="sport")
+      div
+        label(for="schedule") Fecha y horario:
+        input(type="date" name="schedule")
+      div
+        label(for="winner") Ganador:
+        input(type="text" name="winner")
+
+      button(type="submit") Crear Evento

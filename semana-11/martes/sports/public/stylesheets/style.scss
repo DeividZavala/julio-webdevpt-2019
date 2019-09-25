@@ -1,0 +1,25 @@
+$primary: #00b7ff;
+$header-color: red;
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a:not(:last-child) {
+  color: $primary;
+  margin-right: 2%;
+}
+
+ul {
+  a {
+    margin-left: 2%;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $header-color;
+}

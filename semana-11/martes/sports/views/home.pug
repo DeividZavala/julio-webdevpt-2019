@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  main
+    h2 Home
+
+    ul
+      each event in events
+        li=event.title
+          a(href="/edit") editar
