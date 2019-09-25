@@ -1,0 +1,23 @@
+mixin form(data={})
+  form(action=data._id ? `/edit/${data._id}` : "/new-event" method="POST")
+      div
+        label(for="title") Titulo:
+        input(id="title" type="text" name="title" value=data.title)
+      div
+        label(for="location") Lugar:
+        input(id="location" type="text" name="location" value=data.location)
+      div
+        label(for="participants") Participantes:
+        input(type="text" name="participants" value=data.participants)
+      div
+        label(for="sport") Deporte:
+        input(type="text" name="sport" value=data.sport)
+      div
+        label(for="schedule") Fecha y horario:
+        input(type="date" name="schedule" value=data.schedule)
+      if data._id
+          div
+            label(for="winner") Ganador:
+            input(type="text" name="winner")
+
+      button(type="submit")=data._id ? "Editar Evento" : "Crear Evento"

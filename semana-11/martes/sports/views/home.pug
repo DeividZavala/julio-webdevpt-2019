@@ -7,4 +7,4 @@ block content
     ul
       each event in events
         li=event.title
-          a(href="/edit") editar
+          a(href=`/edit/${event._id}`) editar

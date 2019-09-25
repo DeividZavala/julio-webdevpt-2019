@@ -9,6 +9,22 @@ router.get("/", (req, res, next) => {
   });
 });
 
+router.get("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  Event.findById(id).then(event => {
+    res.render("update", { event });
+  });
+});
+
+router.post("/edit/:id", (req, res) => {
+  const { id } = req.params;
+  const event = { ...req.body };
+  console.log(event);
+  Event.findByIdAndUpdate(id, { $set: event }).then(() => {
+    res.redirect("/");
+  });
+});
+
 router.get("/new-event", (req, res) => {
   res.render("new-event", { title: "Nuevo Evento" });
 });
