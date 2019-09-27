@@ -1,6 +1,6 @@
-mixin form()
+mixin form(register, error)
   div
-    form(action="" method="post")
+    form(action="/register" method="post")
       div
         label(for="email") Email
         input(type="email" id="email" name="email" required)
@@ -10,4 +10,6 @@ mixin form()
       div
         label(for="confirm-pass") Corfirm Password
         input(type="password" id="confirm-pass" name="confirm-pass" required)
+      if error
+        p(style="color:red")=error
       button(type="submit") Register
