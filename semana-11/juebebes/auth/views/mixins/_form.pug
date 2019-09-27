@@ -1,0 +1,13 @@
+mixin form()
+  div
+    form(action="" method="post")
+      div
+        label(for="email") Email
+        input(type="email" id="email" name="email" required)
+      div
+        label(for="pass") Password
+        input(type="password" id="pass" name="password" required)
+      div
+        label(for="confirm-pass") Corfirm Password
+        input(type="password" id="confirm-pass" name="confirm-pass" required)
+      button(type="submit") Register
