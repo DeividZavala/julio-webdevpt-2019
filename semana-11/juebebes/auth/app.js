@@ -7,6 +7,8 @@ const favicon = require("serve-favicon");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const session = require("express-session");
+const mongoStore = require("connect-mongo")(session);
 
 mongoose
   .connect("mongodb://localhost/auth", {
@@ -45,6 +47,18 @@ app.use(
   })
 );
 
+app.use(
+  session({
+    secret: "David1$",
+    cookie: { maxAge: 3600000 },
+    resave: true,
+    store: new mongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  })
+);
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
@@ -54,6 +68,8 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.locals.title = "Express - Generated with IronGenerator";
 
 const auth = require("./routes/auth");
+const index = require("./routes/index");
+app.use("/", index);
 app.use("/", auth);
 
 module.exports = app;

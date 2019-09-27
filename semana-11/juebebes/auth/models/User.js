@@ -13,7 +13,7 @@ const userSchema = new Schema(
       required: true
     }
   },
-  { timestamps }
+  { timestamps: true }
 );
 
 module.exports = model("User", userSchema);
