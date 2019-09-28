@@ -5,7 +5,6 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: true,
       unique: true
     },
     facebookId: {
@@ -15,8 +14,7 @@ const userSchema = new Schema(
       type: String
     },
     password: {
-      type: String,
-      required: true
+      type: String
     },
     role: {
       type: String,

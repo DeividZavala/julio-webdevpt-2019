@@ -10,8 +10,6 @@ passport.use(
       callbackURL: "http://localhost:3000/facebook/callback"
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log(profile);
-
       User.findOne({ facebookId: profile.id })
         .then(user => {
           if (user) {

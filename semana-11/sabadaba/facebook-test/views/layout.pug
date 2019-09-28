@@ -9,7 +9,7 @@ html(lang="en")
   body
 
     if user
-      p hole #{user.email}
+      p hole #{user.displayName ? user.displayName : user.email}
       a(href="/logout") Logout
     else
       a(href="/login") Login
