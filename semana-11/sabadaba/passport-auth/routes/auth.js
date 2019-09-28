@@ -9,8 +9,12 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (error, user, info) => {
-    console.log(error, user, info);
+  passport.authenticate("local", (err, user, info = {}) => {
+    const { message: error } = info;
+    if (error) {
+      res.render("login", { error });
+    }
+    res.redirect("/");
   })(req, res);
 });
 
