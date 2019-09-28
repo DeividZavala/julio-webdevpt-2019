@@ -14,7 +14,9 @@ router.post("/login", (req, res, next) => {
     if (error) {
       res.render("login", { error });
     }
-    res.redirect("/");
+    req.login(user, err => {
+      res.redirect("/");
+    });
   })(req, res);
 });
 
@@ -53,6 +55,11 @@ router.post("/register", (req, res) => {
       res.redirect("/login");
     });
   });
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/login");
 });
 
 module.exports = router;

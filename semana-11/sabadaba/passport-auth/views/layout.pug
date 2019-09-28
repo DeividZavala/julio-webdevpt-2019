@@ -8,6 +8,13 @@ html(lang="en")
     link(rel="stylesheet" href="/stylesheets/style.css")
   body
 
+    if user
+      p hole #{user.email}
+      a(href="/logout") Logout
+    else
+      a(href="/login") Login
+      a(href="/register") Register
+
     block content
 
     script(src="/javascripts/script.js")
