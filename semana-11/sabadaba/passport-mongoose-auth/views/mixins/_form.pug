@@ -1,0 +1,17 @@
+mixin form(register, error)
+  div
+    form(action=register ? "/register" : "/login" method="post")
+      div
+        label(for="email") Email
+        input(type="email" id="email" name="email" required)
+      div
+        label(for="pass") Password
+        input(type="password" id="pass" name="password" required)
+      
+      if register
+        div
+          label(for="confirm-pass") Corfirm Password
+          input(type="password" id="confirm-pass" name="confirm-pass" required)
+      if error
+        p(style="color:red")=error
+      button(type="submit")=register ? "Register" : "Login"
