@@ -1,0 +1,43 @@
+mixin form()
+  div
+    form(action="/new" method="post")
+      div
+        label(for="name") Nombre:
+        input(id="name" type="text" name="name")
+      div
+        label(for="capacity") Capacidad:
+        input(id="capacity" type="text" name="capacity")
+      div
+        label(for="address") Dirección:
+        input(id="address" type="text" name="address")
+      div
+        label(for="lng") Longitud:
+        input(id="lng" type="text" name="lng")
+      div
+        label(for="lat") Latitud:
+        input(id="lat" type="text" name="lat")
+      div
+        label(for="image") Imagen:
+        input(type="text" name="image")
+      button(type="submit") Crear lugar
+
+    div(id="search")
+
+    div(id="map" style="width:800px;height:450px")
+
+    script.
+      mapboxgl.accessToken = 'pk.eyJ1IjoiY3J1c2VkbW9zcyIsImEiOiJjazE4azQ5MWoxam1tM21sYjMzMGg2NmZqIn0.YsSWP5itqTxZj82edI6Biw';
+      const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v10'
+      });
+
+      const lng = document.getElementById("lng")
+      const lat = document.getElementById("lat")
+      const address = document.getElementById("address")
+
+      const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+      });
+
+      document.getElementById("search").appendChild(geocoder.onAdd(map))
