@@ -17,7 +17,7 @@ const placeSchema = new Schema(
     location: {
       type: {
         type: String,
-        default: Point
+        default: "Point"
       },
       address: {
         type: String

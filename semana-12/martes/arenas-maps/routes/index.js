@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Place = require("../models/Place");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -12,6 +13,14 @@ router.get("/map", (req, res) => {
 
 router.get("/new", (req, res) => {
   res.render("new");
+});
+
+router.post("/new", (req, res) => {
+  let { lat, lng, address, ...place } = req.body;
+  place = { ...place, location: { address, coords: [lng, lat] } };
+  Place.create(place).then(place => {
+    res.redirect("/");
+  });
 });
 
 module.exports = router;

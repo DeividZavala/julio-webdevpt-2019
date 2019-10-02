@@ -40,4 +40,13 @@ mixin form()
         accessToken: mapboxgl.accessToken
       });
 
+      geocoder.on("result", res => {
+        console.log(res.result)
+        const { geometry: { coordinates }, place_name } = res.result
+
+        lng.value = coordinates[0]
+        lat.value = coordinates[1]
+        address.value = place_name
+      })
+
       document.getElementById("search").appendChild(geocoder.onAdd(map))
