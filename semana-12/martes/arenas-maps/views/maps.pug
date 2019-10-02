@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  main
+    div(id="map" style='width: 400px; height: 300px;')
+
+    script.
+      mapboxgl.accessToken = 'pk.eyJ1IjoiY3J1c2VkbW9zcyIsImEiOiJjazE4azQ5MWoxam1tM21sYjMzMGg2NmZqIn0.YsSWP5itqTxZj82edI6Biw';
+      const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v10'
+      });
+
+      map.addControl(new mapboxgl.NavigationControl())
+      map.addControl(new MapboxDirections({
+        accessToken: mapboxgl.accessToken
+      }), 'top-left')
+
+      if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition((position) => {
+          console.log(position)
+          const {latitude: lat, longitude: lng} = position.coords
+
+          const popup = new mapboxgl.Popup().setText("Ya me wache morro")
+
+          const marker = new mapboxgl.Marker().setLngLat([lng,lat]).setPopup(popup).addTo(map)
+          map.setCenter([lng,lat]).setZoom(15)
+
+        }, () => {
+          console.log("Epale no te quiero decir on toy")
+        })
+
+      }else{
+          console.log('Browser does not support geolocation.');
+      }
