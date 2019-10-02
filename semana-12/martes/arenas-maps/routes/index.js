@@ -4,7 +4,9 @@ const Place = require("../models/Place");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  Place.find().then(places => {
+    res.render("index", { places });
+  });
 });
 
 router.get("/map", (req, res) => {

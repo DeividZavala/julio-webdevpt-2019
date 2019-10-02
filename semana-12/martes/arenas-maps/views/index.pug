@@ -2,4 +2,27 @@ extends layout
 
 block content
   main
-    h1 Perfil
+    h1 Lugares
+
+    ul
+      each place in places
+        li=place.name
+    div(id="map" style="width:800px;height:450px")
+
+  script.
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY3J1c2VkbW9zcyIsImEiOiJjazE4azQ5MWoxam1tM21sYjMzMGg2NmZqIn0.YsSWP5itqTxZj82edI6Biw';
+      const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/dark-v10'
+      });
+
+    map.addControl(new mapboxgl.NavigationControl())
+
+    let places = !{JSON.stringify(places).replace(/<\//g, "<\\/")}
+
+    places.forEach(place => {
+      const marker = new mapboxgl.Marker().setLngLat(place.location.coords)
+      marker.addTo(map)
+    })
+
+    
