@@ -16,7 +16,7 @@ const getCharacters = (url = "https://rickandmortyapi.com/api/character") => {
     characters = [...characters, ...results];
     results.forEach(character => {
       span.innerText = res.data.info.count;
-      list.innerHTML += `<li>${character.name}</li>`;
+      list.innerHTML += `<li data-id="${character.id}">${character.name}</li>`;
     });
   });
 };
@@ -46,8 +46,16 @@ const getCharacter = (id = 1) => {
   });
 };
 
+document.addEventListener("click", event => {
+  console.log(event.target.dataset);
+  const id = event.target.dataset.id;
+  if (id) {
+    query.value = id;
+    getCharacter(id);
+  }
+});
+
 getCharacters();
-getCharacter(2);
 btn.onclick = () => getCharacters(next);
 search.onclick = () => {
   getCharacter(query.value);
