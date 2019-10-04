@@ -12,13 +12,36 @@
     />
   </head>
   <body>
+    <section class="uk-section">
+      <div class="uk-container">
+        <ul class="uk-breadcrumb">
+          <li><a>Characters</a></li>
+          <li>
+            <a>Total de: <span class="uk-label">0</span></a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
     <section>
-      <ul class="uk-breadcrumb">
-        <li><a>Characters</a></li>
-        <li>
-          <a>Total de: <span class="uk-label">0</span></a>
-        </li>
-      </ul>
+      <div class="uk-container">
+        <div class="uk-grid">
+          <div class="uk-width-1-2">
+            <ul id="list"></ul>
+            <button class="uk-button uk-button-primary" id="load">
+              Cargar más
+            </button>
+          </div>
+          <div class="uk-width-1-2">
+            <div>
+              <input class="uk-input" type="text" placeholder="Coloca un id" />
+              <button class="uk-button uk-button-primary" id="search">
+                Buscar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- UIkit JS -->
