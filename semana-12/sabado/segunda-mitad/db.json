@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "name": "David",
+      "username": "moss",
+      "age": "23",
+      "email": "crusedmoss@gmail.com",
+      "projects": [1],
+      "id": 1
+    },
+    {
+      "name": "Pat",
+      "username": "rey",
+      "age": 30,
+      "email": "rey@gmail.com",
+      "id": 2
+    }
+  ],
+  "projects": [
+    {
+      "title": "Sinchronize",
+      "username": "Emmanuel",
+      "champion": true,
+      "id": 1
+    }
+  ]
+}
