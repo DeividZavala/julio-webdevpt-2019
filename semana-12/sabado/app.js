@@ -1,14 +1,24 @@
 const list = document.getElementById("list");
 const span = document.querySelector("span");
 const btn = document.getElementById("load");
-const query = document.querySelector("input");
+const fields = document.querySelectorAll("input");
 const search = document.getElementById("search");
 const detail = document.getElementById("detail");
+let field_id = document.getElementById("id");
+let field_release_date = document.getElementById("release_date");
+let field_media_type = document.getElementById("media_type");
+let field_title = document.getElementById("title");
 
 let media = [];
 
 const setMedia = elem => {
-  console.log(elem.dataset);
+  search.innerText = "Editar";
+  search.onclick = () => createMedia();
+  const { id, date, title, media_type } = elem.dataset;
+  field_id.value = id;
+  field_media_type.value = media_type;
+  field_title.value = title;
+  field_release_date.value = date.split("T")[0];
 };
 
 const getMedia = () => {
@@ -62,5 +72,17 @@ const getMedia = () => {
     });
   });
 };
+
+const updateMedia = () => {
+  const data = [...fields].reduce((acc, field) => {
+    return { ...acc, [field.id]: field.value };
+  }, {});
+  console.log(data);
+  axios.patch(`http://localhost:3000/api/media/${data.id}`, data).then(res => {
+    console.log(res.data);
+  });
+};
+
+search.onclick = () => updateMedia();
 
 getMedia();
