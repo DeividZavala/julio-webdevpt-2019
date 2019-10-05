@@ -7,6 +7,10 @@ const detail = document.getElementById("detail");
 
 let media = [];
 
+const setMedia = elem => {
+  console.log(elem.dataset);
+};
+
 const getMedia = () => {
   axios.get("http://localhost:3000/api/media/").then(res => {
     console.log(res.data);
@@ -32,7 +36,12 @@ const getMedia = () => {
                 </button>
                 <div uk-dropdown='true'>
                   <ul class='uk-nav uk-dropdown-nav'>
-                    <li>
+                    <li 
+                    data-id="${media._id}"
+                    data-title="${media.title}"
+                    data-date="${media.release_date}"
+                    data-media_type="${media.media_type}"
+                    onclick='setMedia(this)'>
                       <a href='#'>
                         Editar <span uk-icon='icon: pencil' />
                       </a>
