@@ -8,9 +8,13 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const cors = require("cors");
 
 mongoose
-  .connect("mongodb://localhost/api-test", { useNewUrlParser: true })
+  .connect("mongodb://localhost/api-test", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -32,6 +36,12 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5500"]
+  })
+);
 
 // Express View engine setup
 
