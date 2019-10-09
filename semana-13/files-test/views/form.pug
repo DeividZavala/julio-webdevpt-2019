@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  div
+    h3 Nuevo lugar
+    form(action="/new" method="post" enctype="multipart/form-data")
+      div
+        label(for="") Nombre:
+        input(type="text" name="name")
+      div
+        label(for="") Desc:
+        input(type="text" name="description")
+      div
+        label(for="") Images:
+        input(type="file" name="images" multiple)
+      button(type="submit") Crear arena
