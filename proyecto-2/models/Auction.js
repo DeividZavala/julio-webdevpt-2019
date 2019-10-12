@@ -7,6 +7,11 @@ const auctionSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User"
     },
+    title: {
+      type: String,
+      required: true,
+      unique: true
+    },
     lider: {
       type: Schema.Types.ObjectId,
       ref: "Bid"
