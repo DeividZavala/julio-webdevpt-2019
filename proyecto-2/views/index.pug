@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  main
+    .uk-position-relative.uk-visible-toggle.uk-light(tabindex='-1', uk-slideshow='autoplay:true;ratio: false;animation: fade')
+      ul.uk-slideshow-items(uk-height-viewport="offset-top: true; offset-bottom: 0")
+        li
+          img(src='https://getuikit.com/docs/images/photo.jpg', alt='', uk-cover)
+          .uk-overlay.uk-overlay-primary.uk-position-bottom.uk-text-center.uk-transition-slide-bottom
+            h3.uk-margin-remove Bottom
+            p.uk-margin-remove Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        li
+          img(src='https://getuikit.com/docs/images/dark.jpg', alt='', uk-cover)
+          .uk-overlay.uk-overlay-primary.uk-position-bottom.uk-text-center.uk-transition-slide-bottom
+            h3.uk-margin-remove Bottom
+            p.uk-margin-remove Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        li
+          img(src='https://getuikit.com/docs/images/light.jpg', alt='', uk-cover)
+          .uk-overlay.uk-overlay-primary.uk-position-right.uk-text-center.uk-transition-slide-right.uk-width-medium
+            h3.uk-margin-remove Left
+            p.uk-margin-remove Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      a.uk-position-center-left.uk-position-small.uk-hidden-hover(href='#', uk-slidenav-previous='', uk-slideshow-item='previous')
+      a.uk-position-center-right.uk-position-small.uk-hidden-hover(href='#', uk-slidenav-next='', uk-slideshow-item='next')
+
+  section.uk-section
+    .uk-container
+      .uk-grid.uk-grid.uk-child-width-1-3
+        div.uk-card.uk-card-default.uk-card-body.uk-text-center
+          span(uk-icon="ratio:2; icon:star")
+          p
+            | Lorem ipsum 
+            a(href='#') dolor
+            |  sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        div.uk-card.uk-card-default.uk-card-body.uk-text-center
+          span(uk-icon="ratio:2; icon:happy")
+          p
+            | Lorem ipsum 
+            a(href='#') dolor
+            |  sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        div.uk-card.uk-card-default.uk-card-body.uk-text-center
+          span(uk-icon="ratio:2; icon:heart")
+          p
+            | Lorem ipsum 
+            a(href='#') dolor
+            |  sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

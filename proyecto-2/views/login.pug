@@ -1,0 +1,9 @@
+extends layout
+
+include mixins/_authform
+
+block content
+  section.uk-section
+    .uk-container.uk-flex.uk-flex-center
+      .uk-width-1-2.uk-flex.uk-flex-center
+        +authform(false, errorMessage)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title=title
+    link(rel="stylesheet" href="/stylesheets/style.css")
+    <!-- UIkit CSS -->
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css")
+  body
+
+    nav.uk-navbar-container(uk-navbar='')
+      .uk-navbar-left
+        ul.uk-navbar-nav
+          li.uk-active
+            a(href='#') Active
+          li
+            a(href='#') Parent
+            .uk-navbar-dropdown
+              ul.uk-nav.uk-navbar-dropdown-nav
+                li.uk-active
+                  a(href='#') Active
+                li
+                  a(href='#') Item
+                li
+                  a(href='#') Item
+          li
+            a(href='#') Item
+      .uk-navbar-right
+        ul.uk-navbar-nav
+          li.uk-active
+            a(href='#') Active
+          li
+            a(href='#') Parent
+            .uk-navbar-dropdown
+              ul.uk-nav.uk-navbar-dropdown-nav
+                li.uk-active
+                  a(href='#') Active
+                li
+                  a(href='#') Item
+                li
+                  a(href='#') Item
+          li
+            a(href='#') Item
+  
+
+    block content
+
+    <!-- UIkit JS -->
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit-icons.min.js")
+    script(src="/javascripts/script.js")
