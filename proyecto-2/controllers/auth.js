@@ -1,5 +1,6 @@
 const passport = require("../helpers/passport");
 const User = require("../models/User");
+const { send } = require("../helpers/mailer");
 
 exports.login = (req, res) => {
   passport.authenticate("local", (err, user, info = {}) => {
@@ -29,6 +30,13 @@ exports.signup = (req, res) => {
 
   User.register({ username, email }, password)
     .then(usr => {
+      const options = {
+        filename: "register",
+        email: usr.email,
+        message: "Valida tu correo",
+        subject: "Confirma correo"
+      };
+      send(options);
       req.login(usr, errorMessage => {
         if (errorMessage)
           return res.render("register", { title: "Sign Up", errorMessage });
