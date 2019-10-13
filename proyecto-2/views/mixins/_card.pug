@@ -25,12 +25,11 @@ mixin card(auction, user,index)
       if user._id.toString() !== auction.author.toString()
         button.uk-button.uk-button-primary(href="#toggle-animation" uk-toggle=`target: #auction-${index}; animation: uk-animation-fade`) Ofertar
         div(id=`auction-${index}` hidden aria-hidden="true")
-          form(action=`/bids/${auction._id}` method="post")
-            .uk-flex
-              div
-                label(class="uk-form-label" for="") Bid
-                input.uk-input(type="number" name="bid")
-              button.uk-button(type="submit") create bid
+          .uk-flex
+            div
+              label(class="uk-form-label" for="") Bid
+              input.uk-input(type="number" name="bid")
+            button.uk-button(type="submit" data-id=auction._id data-user=user._id) tender
       else
         a.uk-button.uk-button-primary(href=`/auctions/update/${auction._id}`) edit
         a.uk-button.uk-button-primary(href=`/auctions/delete/${auction._id}`) delete

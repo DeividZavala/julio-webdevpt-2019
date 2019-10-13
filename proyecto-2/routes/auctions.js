@@ -3,6 +3,7 @@ const router = express.Router();
 const { isAuth } = require("../helpers/authMiddlewares");
 const uploader = require("../helpers/multer");
 const Auction = require("../models/Auction");
+const auctionController = require("../controllers/auctions");
 
 // Get- form de crear
 router.get("/new", isAuth, (req, res) => {
@@ -10,31 +11,12 @@ router.get("/new", isAuth, (req, res) => {
 });
 
 // Post- form de crear
-router.post("/new", isAuth, uploader.array("images"), (req, res) => {
-  const {
-    user: { _id: author }
-  } = req;
-  const { body } = req;
-  const images = req.files.map(file => file.secure_url);
-  let { lat, lng, address, ...auction } = body;
-  auction = {
-    author,
-    images,
-    ...auction,
-    location: { address, coords: [lng, lat] }
-  };
-  Auction.create(auction)
-    .then(auction => {
-      res.redirect("/profile");
-    })
-    .catch(errorMessage => {
-      res.render("newAuction", {
-        title: "New Auction",
-        create: true,
-        errorMessage
-      });
-    });
-});
+router.post(
+  "/new",
+  isAuth,
+  uploader.array("images"),
+  auctionController.createAuction
+);
 
 // Get- form de editar
 router.get("/update/:id", isAuth, (req, res) => {
@@ -45,25 +27,13 @@ router.get("/update/:id", isAuth, (req, res) => {
 });
 
 // Post- form de editar
-router.post("/update/:id", isAuth, uploader.array("images"), (req, res) => {
-  const { id } = req.params;
-  const { body: auction } = req;
-  const images = req.files.map(file => file.secure_url);
-  Auction.findByIdAndUpdate(id, { $set: { ...auction, images } }, { new: true })
-    .then(auction => {
-      //res.redirect("/profile");
-      res.status(200).json({ auction });
-    })
-    .catch(errorMessage => {
-      res.render("newAuction", { title: "New Auction", errorMessage });
-    });
-});
+router.post(
+  "/update/:id",
+  isAuth,
+  uploader.array("images"),
+  auctionController.updateAuction
+);
 
-router.get("/delete/:id", (req, res) => {
-  const { id } = req.params;
-  Auction.findByIdAndDelete(id).then(() => {
-    res.redirect("/profile");
-  });
-});
+router.get("/delete/:id", isAuth, auctionController.deleteAuction);
 
 module.exports = router;

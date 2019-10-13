@@ -13,16 +13,21 @@ router.post("/:id", isAuth, (req, res) => {
     .populate("lider", "bid")
     .then(auction => {
       if (bid > auction.initial_price || bid > auction.lider.bid) {
-        Bid.create({ ...req.body, author: user._id, auction: id }).then(bid => {
-          Auction.findByIdAndUpdate(auction._id, {
-            $set: { lider: bid._id }
-          }).then(() => {
-            return res.redirect("/home");
-          });
-        });
+        Bid.create({ ...req.body, author: user._id, auction: id })
+          .then(bid => {
+            Auction.findByIdAndUpdate(auction._id, {
+              $set: { lider: bid._id }
+            })
+              .then(() => {
+                return res.redirect("/home");
+              })
+              .catch(err => console.log(err));
+          })
+          .catch(err => console.log(err));
       }
       return res.redirect("/home");
-    });
+    })
+    .catch(err => console.log(err));
 });
 
 module.exports = router;
