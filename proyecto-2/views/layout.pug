@@ -5,44 +5,35 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title=title
-    link(rel="stylesheet" href="/stylesheets/style.css")
     <!-- UIkit CSS -->
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/css/uikit.min.css")
+    link(rel="stylesheet" href="/stylesheets/style.css")
   body
 
     nav.uk-navbar-container(uk-navbar='')
       .uk-navbar-left
         ul.uk-navbar-nav
           li.uk-active
-            a(href='#') Active
-          li
-            a(href='#') Parent
-            .uk-navbar-dropdown
-              ul.uk-nav.uk-navbar-dropdown-nav
-                li.uk-active
-                  a(href='#') Active
-                li
-                  a(href='#') Item
-                li
-                  a(href='#') Item
-          li
-            a(href='#') Item
+            a(href='/') Home
+          li.uk-active
+            a(href='/home') Auctions
+          
       .uk-navbar-right
         ul.uk-navbar-nav
-          li.uk-active
-            a(href='#') Active
-          li
-            a(href='#') Parent
-            .uk-navbar-dropdown
-              ul.uk-nav.uk-navbar-dropdown-nav
-                li.uk-active
-                  a(href='#') Active
-                li
-                  a(href='#') Item
-                li
-                  a(href='#') Item
-          li
-            a(href='#') Item
+          if user
+            li
+              a(href='#')=user.username
+              .uk-navbar-dropdown
+                ul.uk-nav.uk-navbar-dropdown-nav
+                  li.uk-active
+                    a(href='/profile') profile
+                  li
+                    a(href='/logout') logout
+          else
+            li.uk-active
+              a(href='/login') Login
+            li
+              a(href='/signup') Signup
   
 
     block content

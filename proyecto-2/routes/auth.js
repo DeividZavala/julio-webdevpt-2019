@@ -15,7 +15,7 @@ router.get("/signup", restrictAuth, (req, res) => {
 
 router.post("/signup", restrictAuth, authControllers.signup);
 
-router.get("logout", (req, res) => {
+router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/login");
 });

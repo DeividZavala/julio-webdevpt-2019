@@ -1,0 +1,24 @@
+extends layout
+
+include mixins/_card
+
+block content
+  section.uk-section
+    .uk-margin-small.uk-flex
+      .uk-width-1-4.uk-text-center
+        .uk-cover-container.profile-image
+          img(src=user.image ? user.image : 'https://webalia.com/uploads/contenidos_usrs/originales/390098_att515385_20100614150843.jpg' alt=`${image}-${index}`, uk-cover)
+        h3.uk-margin-remove=user.username
+        h4.uk-margin-remove=user.email
+        
+      .uk-width-expand
+        .uk-width-1-1
+          a(href="/auctions/new" class="uk-button uk-button-primary") Create auction
+
+        .uk-margin-small-top.uk-grid.uk-grid-small.uk-child-width-1-3
+          each auction,index in auctions
+            div
+              +card(auction, user,index)
+          else
+            .uk-alert-primary(uk-alert)
+              p no auctions yet

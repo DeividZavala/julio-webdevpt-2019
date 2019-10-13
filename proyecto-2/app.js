@@ -74,7 +74,11 @@ app.locals.title = "Express - Generated with IronGenerator";
 
 const index = require("./routes/index");
 const auth = require("./routes/auth");
+const auctions = require("./routes/auctions");
+const bid = require("./routes/bids");
 app.use("/", index);
 app.use("/", auth);
+app.use("/auctions", auctions);
+app.use("/bids", bid);
 
 module.exports = app;

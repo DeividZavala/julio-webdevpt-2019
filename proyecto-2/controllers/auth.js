@@ -9,7 +9,7 @@ exports.login = (req, res) => {
     }
 
     req.login(user, err => {
-      res.redirect("/home");
+      res.redirect("/profile");
     });
   })(req, res);
 };

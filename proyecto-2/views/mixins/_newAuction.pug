@@ -1,0 +1,32 @@
+mixin newAuctionForm(create, auction = {}, errorMessage)
+  form(action=create ? "/auctions/new" : `/auctions/update/${auction._id}` method="post" enctype="multipart/form-data")
+    .uk-margin
+      label(class="uk-form-label" for="title") Title
+      input.uk-input(type='text' name="title" value=auction.title)
+    .uk-margin
+      label(class="uk-form-label" for="") Initial price
+      input.uk-input(type='number' name="initial_price" value=auction.initial_price)
+    .uk-margin
+      label(class="uk-form-label" for="") Currency
+      .uk-form-controls
+        select#form-horizontal-select.uk-select(name="currency")
+          option(disabled) Select currency
+          option(value="MXN" selected=auction.currency==='MXN') MXN
+          option(value="USD" selected=auction.currency==='USD') USD
+    .uk-margin
+      label(class="uk-form-label" for="") Initial date
+      input.uk-input(type='datetime-local' name="initial_date" value=auction.initial_date ? auction.initial_date.toString().split("T")[0]: "")
+    .uk-margin
+      label(class="uk-form-label" for="") End date
+      input.uk-input(type='datetime-local' name="end_date" value=auction.end_date ? auction.end_date.toString().split("T")[0]: "")
+    .uk-margin
+      label(class="uk-form-label" for="images") Images
+      input.uk-input(type='file' name="images" multiple)
+    if auction.images
+      each image,index in auction.images
+        .uk-cover-container.auction-form-image
+          img(src=image alt=`${image}-${index}`, uk-cover)
+    if errorMessage
+      .uk-alert-danger.uk-width-1-1(uk-alert)
+        p #{errorMessage}
+    button.uk-button.uk-button-primary(type="submit")=create ? "create auction" : "Update auction"

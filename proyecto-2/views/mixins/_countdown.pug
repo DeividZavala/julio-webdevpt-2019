@@ -1,0 +1,17 @@
+mixin countdown(date)
+  .uk-grid-small.uk-child-width-auto(uk-grid='', uk-countdown=`date: ${date}`)
+    div
+      .uk-countdown-number.uk-countdown-days.uk-text-large
+      .uk-countdown-label.uk-margin-small.uk-text-center(class='uk-visible@s') Days
+    .uk-countdown-separator.uk-text-large :
+    div
+      .uk-countdown-number.uk-countdown-hours.uk-text-large
+      .uk-countdown-label.uk-margin-small.uk-text-center(class='uk-visible@s') Hours
+    .uk-countdown-separator.uk-text-large :
+    div
+      .uk-countdown-number.uk-countdown-minutes.uk-text-large
+      .uk-countdown-label.uk-margin-small.uk-text-center(class='uk-visible@s') Minutes
+    .uk-countdown-separator.uk-text-large :
+    div
+      .uk-countdown-number.uk-countdown-seconds.uk-text-large
+      .uk-countdown-label.uk-margin-small.uk-text-center(class='uk-visible@s') Seconds

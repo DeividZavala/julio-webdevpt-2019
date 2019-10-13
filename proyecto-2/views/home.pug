@@ -1,0 +1,10 @@
+extends layout
+
+include mixins/_card
+
+block content
+  main
+    .uk-margin-small-top.uk-grid.uk-grid-small.uk-child-width-1-3
+      each auction,index in auctions
+        div
+          +card(auction,user,index)

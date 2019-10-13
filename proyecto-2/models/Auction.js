@@ -34,7 +34,7 @@ const auctionSchema = new Schema(
       min: 100000,
       required: true
     },
-    image: {
+    images: {
       type: [String],
       minlength: 1
     }

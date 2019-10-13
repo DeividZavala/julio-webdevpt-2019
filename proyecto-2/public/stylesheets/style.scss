@@ -7,3 +7,20 @@ body {
 a {
   color: $primary;
 }
+
+.auction-form-image {
+  width: 260px;
+  height: 260px;
+}
+
+.profile-image {
+  width: 260px;
+  height: 260px;
+  display: inline-block;
+}
+
+@media (min-width: 640px) {
+  .uk-countdown-number {
+    font-size: 1rem;
+  }
+}
