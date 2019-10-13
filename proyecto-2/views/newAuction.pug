@@ -5,5 +5,30 @@ include mixins/_newAuction
 block content
   section.uk-section
     .uk-container.uk-flex.uk-flex-center
-      .uk-width-1-2.uk-flex.uk-flex-center
+      .uk-width-1-2.uk-flex.uk-flex-middle.uk-flex-column
         +newAuctionForm(create, auction, errorMessage)
+
+  script.
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY3J1c2VkbW9zcyIsImEiOiJjazE4azQ5MWoxam1tM21sYjMzMGg2NmZqIn0.YsSWP5itqTxZj82edI6Biw';
+    const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10'
+    });
+
+    const lng = document.getElementById("lng")
+    const lat = document.getElementById("lat")
+    const address = document.getElementById("address")
+
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken
+    });
+
+    geocoder.on("result", res => {
+      const { geometry: { coordinates }, place_name } = res.result
+
+      lng.value = coordinates[0]
+      lat.value = coordinates[1]
+      address.value = place_name
+    })
+
+    document.getElementById("search").appendChild(geocoder.onAdd(map))

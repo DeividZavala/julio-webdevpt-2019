@@ -14,9 +14,16 @@ router.post("/new", isAuth, uploader.array("images"), (req, res) => {
   const {
     user: { _id: author }
   } = req;
-  const { body: auction } = req;
+  const { body } = req;
   const images = req.files.map(file => file.secure_url);
-  Auction.create({ ...auction, images, author })
+  let { lat, lng, address, ...auction } = body;
+  auction = {
+    author,
+    images,
+    ...auction,
+    location: { address, coords: [lng, lat] }
+  };
+  Auction.create(auction)
     .then(auction => {
       res.redirect("/profile");
     })

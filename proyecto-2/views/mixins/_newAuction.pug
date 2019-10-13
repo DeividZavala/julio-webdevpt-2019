@@ -22,6 +22,16 @@ mixin newAuctionForm(create, auction = {}, errorMessage)
     .uk-margin
       label(class="uk-form-label" for="images") Images
       input.uk-input(type='file' name="images" multiple)
+
+    div.uk-margin
+      label(for="address") Dirección:
+      input.uk-input(id="address" type="text" name="address")
+    div.uk-margin
+      label(for="lng") Longitud:
+      input.uk-input(id="lng" type="text" name="lng")
+    div.uk-margin
+      label(for="lat") Latitud:
+      input.uk-input(id="lat" type="text" name="lat")
     if auction.images
       each image,index in auction.images
         .uk-cover-container.auction-form-image
@@ -30,3 +40,7 @@ mixin newAuctionForm(create, auction = {}, errorMessage)
       .uk-alert-danger.uk-width-1-1(uk-alert)
         p #{errorMessage}
     button.uk-button.uk-button-primary(type="submit")=create ? "create auction" : "Update auction"
+
+  div.uk-margin(id="search")
+
+  div(id="map" style="width:800px;height:450px")

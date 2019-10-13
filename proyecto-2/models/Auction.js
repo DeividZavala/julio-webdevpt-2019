@@ -34,6 +34,20 @@ const auctionSchema = new Schema(
       min: 100000,
       required: true
     },
+    location: {
+      type: {
+        type: String,
+        default: "Point"
+      },
+      address: {
+        type: String,
+        required: true
+      },
+      coords: {
+        type: [Number],
+        required: true
+      }
+    },
     images: {
       type: [String],
       minlength: 1
