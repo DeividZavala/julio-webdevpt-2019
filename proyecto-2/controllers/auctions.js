@@ -55,13 +55,26 @@ exports.updateAuctionLeader = obj => {
   return Auction.findById(obj.auction)
     .populate("lider", "bid")
     .then(auction => {
-      if (obj.offer > auction.initial_price || obj.offer > auction.lider.bid) {
+      if (!auction.lider) {
         return Bid.create({ ...obj }).then(bid => {
           return Auction.findByIdAndUpdate(auction._id, {
             $set: { lider: bid._id }
-          });
+          }).then(() =>
+            Bid.populate(bid, { path: "author", select: "username" })
+          );
+        });
+      } else if (
+        obj.bid > auction.initial_price &&
+        obj.bid > auction.lider.bid
+      ) {
+        return Bid.create({ ...obj }).then(bid => {
+          return Auction.findByIdAndUpdate(auction._id, {
+            $set: { lider: bid._id }
+          }).then(() =>
+            Bid.populate(bid, { path: "author", select: "username" })
+          );
         });
       }
-      throw new Error("Oferta no valida");
+      throw new Error("Tu oferta tiene que ser mayor a la oferta lider");
     });
 };

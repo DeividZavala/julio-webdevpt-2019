@@ -50,10 +50,9 @@ io.on("connection", function(socket) {
     auctionController
       .updateAuctionLeader(bid)
       .then(obj => {
-        console.log(obj);
+        io.emit("bid", obj);
       })
       .catch(err => {
-        console.log(err.message);
         io.emit("invalid offer", err.message);
       });
   });

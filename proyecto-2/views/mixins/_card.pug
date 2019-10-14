@@ -19,8 +19,11 @@ mixin card(auction, user,index)
         h5=new Date(auction.initial_date).getTime() < Date.now() ? "La subasta termina en:" : "La subasta inicia en:"
         - const date = new Date(auction.initial_date).getTime() < Date.now() ? auction.end_date:auction.initial_date      
         +countdown(date)
-    .uk-card-footer
-      p.uk-text-meta.uk-margin-small=`Lider: ${(auction.lider && auction.lider.author) ? auction.lider.author.username : 'Sin lider'} - Oferta: ${(auction.lider && auction.lider.bid) ? auction.lider.bid : 'Sin oferta'} ${auction.currency}`
+    .uk-card-footer(data-item=auction._id)
+      p.uk-text-meta.uk-margin-small=`Lider: ${(auction.lider && auction.lider.author) ? auction.lider.author.username : 'Sin lider'}`
+        .uk-flex
+          p.uk-text-meta.uk-margin-small=`Oferta: ${(auction.lider && auction.lider.bid) ? auction.lider.bid : 'Sin oferta'}`
+          span.uk-inline.uk-margin-small-left=auction.currency
       p.uk-text-meta.uk-margin-small=`Precio inicial $${auction.initial_price} ${auction.currency}`
       if user._id.toString() !== auction.author.toString()
         button.uk-button.uk-button-primary(href="#toggle-animation" uk-toggle=`target: #auction-${index}; animation: uk-animation-fade`) Ofertar
