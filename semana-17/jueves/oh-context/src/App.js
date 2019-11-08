@@ -1,17 +1,11 @@
 import React from "react";
 import "./App.css";
-import Home from "./Component/Home";
-import Profile from "./Component/Profile";
+import Router from "./Router";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <Home />
-      </div>
-      <div>
-        <Profile />
-      </div>
+      <Router />
     </div>
   );
 }
