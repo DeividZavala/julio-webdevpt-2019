@@ -1,8 +1,10 @@
-.App {
-  display: flex;
-  justify-content: space-between;
+a {
+  color: grey;
 }
-
+a.active {
+  font-weight: bold;
+  color: black;
+}
 .App-logo {
   height: 40vmin;
 }

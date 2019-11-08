@@ -1,21 +1,32 @@
 import React, { Component } from "react";
 import { AppContext } from "../AppContext";
+import { getCharacters } from "../services/characters";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   static contextType = AppContext;
 
   componentDidMount() {
-    console.log(this.context);
+    const { characters } = this.context;
+    if (!Object.values(characters).length) {
+      getCharacters().then(res => {
+        this.context.setCharacters(res.data.results);
+      });
+    }
   }
 
   render() {
-    const { user, addYear } = this.context;
+    const { characters } = this.context;
     return (
       <div>
-        <div>
-          {user.name} tiene {user.age}
-          <button onClick={addYear}>Hacer mas ruco</button>
-        </div>
+        <ul>
+          {Object.values(characters).map((character, index) => (
+            <li key={index}>
+              {character.name}{" "}
+              <Link to={`/profile/${character.id}`}>Detalle</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

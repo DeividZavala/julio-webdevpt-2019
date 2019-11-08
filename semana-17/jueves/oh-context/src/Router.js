@@ -6,7 +6,7 @@ import Profile from "./Component/Profile";
 const Router = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/profile" component={Profile} />
+    <Route path="/profile/:id" component={Profile} />
   </Switch>
 );
 

@@ -5,7 +5,20 @@ export const AppContext = createContext();
 export default class AppProvider extends Component {
   state = {
     user: { name: "David", age: 22 },
-    products: [{ name: "control", brand: "sony" }]
+    characters: {},
+    currentCharacter: {}
+  };
+
+  setCurrentCharacter = character => {
+    this.setState({ currentCharacter: character });
+  };
+
+  setCharacters = characters => {
+    console.log("context", characters);
+    characters = [...characters].reduce((acc, character) => {
+      return { ...acc, [character.id]: character };
+    }, {});
+    this.setState({ characters });
   };
 
   addYear = () => {
@@ -15,9 +28,11 @@ export default class AppProvider extends Component {
   };
 
   render() {
-    const { addYear } = this;
+    const { addYear, setCharacters, setCurrentCharacter } = this;
     return (
-      <AppContext.Provider value={{ ...this.state, addYear }}>
+      <AppContext.Provider
+        value={{ ...this.state, addYear, setCharacters, setCurrentCharacter }}
+      >
         {this.props.children}
       </AppContext.Provider>
     );
