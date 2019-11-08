@@ -1,12 +1,18 @@
 import React from "react";
 import "./App.css";
-import { AppConsumer } from "./AppContext";
+import Home from "./Component/Home";
+import Profile from "./Component/Profile";
 
 function App() {
   return (
-    <AppConsumer>
-      {state => <div className="App">{state.user.name}</div>}
-    </AppConsumer>
+    <div className="App">
+      <div>
+        <Home />
+      </div>
+      <div>
+        <Profile />
+      </div>
+    </div>
   );
 }
 
