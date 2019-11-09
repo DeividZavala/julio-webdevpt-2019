@@ -52,6 +52,8 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.locals.title = "Express - Generated with IronGenerator";
 
 const auth = require("./routes/auth");
+const posts = require("./routes/posts");
 app.use("/api", auth);
+app.use("/api/posts", posts);
 
 module.exports = app;
