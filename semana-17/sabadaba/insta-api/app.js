@@ -9,7 +9,7 @@ const logger = require("morgan");
 const path = require("path");
 
 mongoose
-  .connect("mongodb://localhost/insta-api", {
+  .connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
