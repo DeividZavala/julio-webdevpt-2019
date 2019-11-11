@@ -7,6 +7,7 @@ const favicon = require("serve-favicon");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const cors = require("cors");
 
 mongoose
   .connect(process.env.DB, {
@@ -42,6 +43,12 @@ app.use(
     src: path.join(__dirname, "public"),
     dest: path.join(__dirname, "public"),
     sourceMap: true
+  })
+);
+
+app.use(
+  cors({
+    origin: ["http://localhost:3001"]
   })
 );
 
