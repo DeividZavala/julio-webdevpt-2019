@@ -7,8 +7,15 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(initialUser);
   const [posts, setPosts] = useState([]);
 
+  const resetContext = () => {
+    setUser({});
+    setPosts([]);
+  };
+
   return (
-    <AppContext.Provider value={{ user, posts, setUser, setPosts }}>
+    <AppContext.Provider
+      value={{ user, posts, setUser, setPosts, resetContext }}
+    >
       {children}
     </AppContext.Provider>
   );

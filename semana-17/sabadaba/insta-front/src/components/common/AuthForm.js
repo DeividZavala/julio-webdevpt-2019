@@ -1,6 +1,12 @@
 import React from "react";
 
-const AuthForm = ({ submit, action, email, password, handleChange }) => (
+const AuthForm = ({
+  submit,
+  action,
+  email = "",
+  password = "",
+  handleChange
+}) => (
   <form className="uk-form-stacked" onSubmit={submit}>
     <div className="uk-margin">
       <label className="uk-form-label">Email:</label>

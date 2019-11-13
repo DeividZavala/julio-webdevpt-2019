@@ -22,6 +22,7 @@ router.post("/", verifyToken, uploader.single("image"), (req, res, next) => {
 router.get("/:postID", verifyToken, (req, res, next) => {
   let { postID } = req.params;
   Post.findById(postID)
+    .populate("author", "username email")
     .then(post => {
       res.status(200).json({ data: post });
     })
@@ -33,12 +34,20 @@ router.get("/:postID", verifyToken, (req, res, next) => {
 //traer posts
 router.get("/", verifyToken, (req, res) => {
   Post.find()
+    .populate("author", "username email")
     .then(posts => {
       res.status(200).json({ data: posts });
     })
     .catch(error => {
       res.status(404).json({ error });
     });
+});
+
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+  Post.findByIdAndDelete(id).then(post => {
+    res.status(200).json({ post, msg: "Borrado con éxito" });
+  });
 });
 
 module.exports = router;

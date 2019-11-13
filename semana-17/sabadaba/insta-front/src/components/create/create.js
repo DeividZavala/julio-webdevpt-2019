@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { createPost } from "../../services/posts";
+import { useHistory } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const Create = () => {
-  const [caption, setCaption] = useState("");
-  const [image, setImage] = useState();
-
-  const handleChange = e => {
-    const name = e.target.name;
-    const value = name === "caption" ? e.target.value : e.target.files[0];
-
-    name === "caption" ? setCaption(value) : setImage(value);
-  };
+  const [form, handleInputs, handleFileInput] = useForm();
+  const { push } = useHistory();
 
   const handleSubmit = e => {
     e.preventDefault();
     let formData = new FormData();
-    formData.append("image", image);
+    const { image, caption } = form;
+    formData.append("image", image[0]);
     formData.append("caption", caption);
-    createPost(formData).then(res => {
-      console.log(res.data);
+    createPost(formData).then(() => {
+      push("/");
     });
   };
 
@@ -29,20 +25,21 @@ const Create = () => {
           <div className="uk-margin">
             <label>Caption:</label>
             <input
-              onChange={handleChange}
+              onChange={handleInputs}
               className="uk-input"
               name="caption"
-              value={caption}
+              value={form.caption ? form.caption : ""}
               type="text"
             />
           </div>
           <div className="uk-margin">
             <label>Image:</label>
             <input
-              onChange={handleChange}
+              onChange={handleFileInput}
               className="uk-input"
               name="image"
               type="file"
+              multiple
             />
           </div>
           <button className="uk-button uk-button-primary" type="submit">

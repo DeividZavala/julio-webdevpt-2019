@@ -1,20 +1,38 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-axios.defaults.headers.common["Authorization"] = token;
-
 export const getPost = id => {
-  return axios.get(`http://localhost:3000/api/posts/${id}`);
+  const token = localStorage.getItem("token");
+  return axios.get(`https://morros.localtunnel.me/api/posts/${id}`, {
+    headers: {
+      Authorization: token
+    }
+  });
 };
 
 export const getPosts = () => {
-  return axios.get(`http://localhost:3000/api/posts`);
+  const token = localStorage.getItem("token");
+  return axios.get(`https://morros.localtunnel.me/api/posts`, {
+    headers: {
+      Authorization: token
+    }
+  });
 };
 
 export const createPost = formData => {
-  return axios.post("http://localhost:3000/api/posts", formData, {
+  const token = localStorage.getItem("token");
+  return axios.post("https://morros.localtunnel.me/api/posts", formData, {
     headers: {
+      Authorization: token,
       "Content-Type": "multipart/form-data"
+    }
+  });
+};
+
+export const deletePost = id => {
+  const token = localStorage.getItem("token");
+  return axios.delete(`https://morros.localtunnel.me/api/posts/${id}`, {
+    headers: {
+      Authorization: token
     }
   });
 };

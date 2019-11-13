@@ -1,24 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import AuthForm from "../common/AuthForm";
 import { login } from "../../services/auth";
 import { AppContext } from "../../AppContext";
 import { useHistory } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { setUser } = useContext(AppContext);
+  const [form, handleInputs] = useForm();
   const { push } = useHistory();
-
-  const handleChange = e => {
-    const value = e.target.value;
-    const name = e.target.name;
-
-    name === "email" ? setEmail(value) : setPassword(value);
-  };
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { email, password } = form;
     login(email, password).then(res => {
       const { user, token } = res.data;
       localStorage.setItem("user", JSON.stringify(user));
@@ -34,9 +28,8 @@ const Login = () => {
         <AuthForm
           submit={handleSubmit}
           action="Login"
-          handleChange={handleChange}
-          email={email}
-          password={password}
+          handleChange={handleInputs}
+          {...form}
         />
       </div>
     </div>

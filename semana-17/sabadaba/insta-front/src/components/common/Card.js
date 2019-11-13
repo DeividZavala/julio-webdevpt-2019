@@ -1,7 +1,16 @@
 import React from "react";
+import moment from "moment";
 
-const PostCard = ({ image, caption }) => (
-  <div>
+const PostCard = ({
+  _id,
+  image,
+  caption,
+  currentUser,
+  author,
+  createdAt,
+  deletePost
+}) => (
+  <div className="uk-margin-small-bottom">
     <div className="uk-card uk-card-default">
       <div className="uk-card-header">
         <div className="uk-grid-small uk-flex-middle" uk-grid="true">
@@ -15,11 +24,29 @@ const PostCard = ({ image, caption }) => (
             />
           </div>
           <div className="uk-width-expand">
-            <h3 className="uk-card-title uk-margin-remove-bottom">Title</h3>
+            <h3 className="uk-card-title uk-margin-remove-bottom">
+              {author.username ? author.username : author.email}
+            </h3>
             <p className="uk-text-meta uk-margin-remove-top">
-              <time dateTime="2016-04-01T19:00">April 01, 2016</time>
+              <time>{moment(createdAt).fromNow()}</time>
             </p>
           </div>
+          {currentUser === author._id ? (
+            <div>
+              <span uk-icon="more-vertical"></span>
+              <div uk-dropdown="mode:click">
+                <ul className="uk-nav uk-dropdown-nav">
+                  <li className="uk-active">
+                    <a href="#">Editar</a>
+                  </li>
+                  <li className="uk-nav-divider"></li>
+                  <li>
+                    <button onClick={() => deletePost(_id)}>Borrar</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : null}
         </div>
       </div>
       <div className="uk-card-body uk-cover-container uk-remove-padding uk-height-medium">

@@ -37,22 +37,26 @@ router.post("/signup", (req, res, next) => {
   let { password, ...newUser } = req.body;
   const salt = bcrypt.genSaltSync(10);
   const hashPassword = bcrypt.hashSync(password, salt);
-  User.create({ ...newUser, password: hashPassword }).then(user => {
-    jwt.sign(
-      {
-        id: user._id
-      },
-      process.env.SECRET,
-      {
-        expiresIn: 86400
-      },
-      (err, token) => {
-        delete user._doc.password;
+  User.create({ ...newUser, password: hashPassword })
+    .then(user => {
+      jwt.sign(
+        {
+          id: user._id
+        },
+        process.env.SECRET,
+        {
+          expiresIn: 86400
+        },
+        (err, token) => {
+          delete user._doc.password;
 
-        if (err) return res.status(500).json({ err });
-        res.status(200).json({ user, token });
-      }
-    );
-  });
+          if (err) return res.status(500).json({ err });
+          res.status(200).json({ user, token });
+        }
+      );
+    })
+    .catch(err => {
+      res.status(500).json({ err, msg: "No se pudo crear cuenta" });
+    });
 });
 module.exports = router;

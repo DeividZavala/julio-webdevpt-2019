@@ -48,7 +48,11 @@ app.use(
 
 app.use(
   cors({
-    origin: ["http://localhost:3001"]
+    origin: [
+      "http://localhost:3001",
+      "http://192.168.18.166",
+      "http://192.168.18.166:3001"
+    ]
   })
 );
 
