@@ -4,6 +4,7 @@ import Home from "./components/home/Home";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Create from "./components/create/create";
+import Profile from "./components/profile/profile";
 
 const Router = () => (
   <Switch>
@@ -18,6 +19,9 @@ const Router = () => (
     </Route>
     <Route path="/create">
       <Create />
+    </Route>
+    <Route path="/profile">
+      <Profile />
     </Route>
   </Switch>
 );
