@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { send } = require("../helpers/mailer");
 
 router.post("/login", (req, res, next) => {
   const { password, email } = req.body;
@@ -41,6 +42,15 @@ router.post("/signup", (req, res, next) => {
 
   User.create({ ...req.body, password: hashedPassword })
     .then(user => {
+      const options = {
+        filename: "register",
+        email: user.email,
+        message: "Confirma tu correo",
+        subject: "Confirma tu correo"
+      };
+
+      send(options);
+
       jwt.sign(
         {
           id: user._id

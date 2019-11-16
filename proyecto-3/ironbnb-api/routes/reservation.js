@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Reservation = require("../models/Reservation");
+const { verifyToken } = require("../helpers/auth");
 
-router.get("/", (req, res) => {
+router.get("/", verifyToken, (req, res) => {
   const { user } = req;
   Reservation.find({ owner: user._id })
     .populate("guest", "username profilepic")
@@ -15,7 +16,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", verifyToken, (req, res) => {
   const { user } = req;
   Reservation.create({ ...req.body, guest: user._id })
     .populate("guest", "username profilepic")
@@ -32,7 +33,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Reservation.findById(id)
     .populate("guest", "username profilepic")
@@ -45,7 +46,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.patch("/:id", (req, res) => {
+router.patch("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Reservation.findByIdAndUpdate(id, { $set: { ...req.body } }, { new: true })
     .populate("guest", "username profilepic")
@@ -58,7 +59,7 @@ router.patch("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Reservation.findByIdAndRemove(id)
     .then(reservation => {

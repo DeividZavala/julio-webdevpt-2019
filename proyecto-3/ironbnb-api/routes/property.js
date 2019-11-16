@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Property = require("../models/Property");
+const uploader = require("../helpers/multer");
+const { verifyToken } = require("../helpers/auth");
 
-router.get("/", (req, res) => {
+router.get("/", verifyToken, (req, res) => {
   Property.find()
     .populate("owner", "username profilepic")
     .then(properties => {
@@ -13,7 +15,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", verifyToken, uploader.array("images"), (req, res) => {
   const { files, user } = req;
   const images = files.map(file => file.secure_url);
   Property.create({ ...req.body, owner: user._id, images })
@@ -30,7 +32,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Property.findById(id)
     .populate("owner", "username profilepic")
@@ -42,7 +44,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.patch("/:id", (req, res) => {
+router.patch("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Property.findByIdAndUpdate(id, { $set: { ...req.body } }, { new: true })
     .populate("owner", "username profilepic")
@@ -54,7 +56,7 @@ router.patch("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", verifyToken, (req, res) => {
   const { id } = req.params;
   Property.findByIdAndRemove(id)
     .then(property => {
