@@ -11,7 +11,7 @@ router.post("/login", (req, res, next) => {
     .then(user => {
       const isValid = bcrypt.compareSync(password, user.password);
       if (!isValid)
-        return res.status(401).json({ error: "Las contraseñas no coincinden" });
+        return res.status(401).json({ error: "Las contraseñas no coinciden" });
 
       jwt.sign(
         {

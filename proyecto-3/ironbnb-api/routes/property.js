@@ -19,12 +19,11 @@ router.post("/", verifyToken, uploader.array("images"), (req, res) => {
   const { files, user } = req;
   const images = files.map(file => file.secure_url);
   Property.create({ ...req.body, owner: user._id, images })
-    .populate("owner", "username profilepic")
     .then(property => {
-      // Property.populate(property, {
-      //   path: "owner",
-      //   select: "username profilepic"
-      // });
+      Property.populate(property, {
+        path: "owner",
+        select: "username profilepic"
+      });
       res.status(200).json({ property });
     })
     .catch(error => {

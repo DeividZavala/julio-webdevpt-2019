@@ -29,7 +29,7 @@ const propertySchema = new Schema(
     },
     images: {
       type: [String],
-      minlength: 2
+      minlength: 1
     },
     price: {
       type: Number,
