@@ -8,7 +8,12 @@ const useForm = () => {
     setForm(prevState => ({ ...prevState, [name]: value }));
   };
 
-  return { form, handleInput };
+  const handleFileInput = e => {
+    const { name, files } = e.target;
+    setForm(prevState => ({ ...prevState, [name]: files }));
+  };
+
+  return { form, handleInput, handleFileInput };
 };
 
 export default useForm;
